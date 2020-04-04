@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>
+		Rompecabezas Jquery
+	</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+</head>
+<body>
+	<!--Incorporacion de un modal de bootstrap-->
+	<div id="miModal" class="modal"  data-backdrop="static" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title">Mensaje del Juego</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  <h3>¡&#x1f389;Felicidades&#x1f38a;!</h3>
+			  <p>¡Has ganado el juego  &#x1f3c6;!</p>
+			</div>
+			<div class="modal-footer">
+			<!-- <button type="button" class="btn btn-primary">Pasar al Nivel 2</button> -->
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">Salir</button>
+			</div>
+		  </div>
+		</div>
+	  </div>	
+
+	  <!--modal derrota-->
+	  <div id="miModalDerrota" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title">Mensaje del Juego</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  <h3>¡&#x1f97a;Lo siento! Intentalo de nuevo &#x1f62d;!</h3>
+			  <p>¡Has perdido el juego!</p>
+			</div>
+			<div class="modal-footer">
+			  <!--<button type="button" class="btn btn-primary">Pasar al Nivel 2</button>-->
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="location.reload()">Salir</button>
+			</div>
+		  </div>
+		</div>
+	  </div>	
+	  
+	<div class="presentacion">
+			<div>
+				<h1>Rompecabezas &#x1f9e9;</h1>
+				<h3>Curso <b>Javascript</b></h3>
+				<p id="desarrollador">por Juan Gabriel Machuca</p>
+			</div>
+	</div>  
+
+	<div class="container-fluid p-0">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-9">
+				<div id="contenedorTabla" class="table-responsive">
+					<table id="miTabla" class="table table-hover table-bordered p-0 m-0">
+						<tr  class="p-0">
+							<td class="p-0"><img class="image-fluid" id="img-caja1" src="img/part3.png" alt="img-part1"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja2" src="img/part5.png" alt="img-part2"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja3" src="img/part1.png" alt="img-part3"></td>
+						</tr>
+						<tr class="p-0">
+							<td class="p-0"><img class="image-fluid" id="img-caja4" src="img/part7.png" alt="img-part4"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja5" src="img/part2.png" alt="img-part5"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja6" src="img/part9.png" alt="img-part6"></td>
+						</tr>
+						<tr class="p-0">
+							<td class="p-0"><img class="image-fluid" id="img-caja7" src="img/part6.png" alt="img-part7"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja8" src="img/part8.png" alt="img-part8"></td>
+							<td class="p-0"><img class="image-fluid" id="img-caja9" src="img/part4.png" alt="img-part9"></td>
+						</tr>	
+					</table>	
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-3">
+				<div id="panelControl">
+					<img id="img1" src="img/rompe.jpg">
+					<div id="tiempo">
+						<p id="segundos"></p>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-12">
+				<form id="formulario">
+					<div class="form-group">
+						<h3>Registro del Jugador</h3>
+						<input type="text" class="form-control" name="nombre" 
+						id="nombre" maxlength="30" placeholder="Nombre del Jugador" required>
+					</div>
+					<div class="form-group">
+						<label for="pais" >De que pais eres?</label>
+						<select class="browser-default custom-select" name="pais" 
+						id="pais" onclick="paises()" required>
+						</select>
+					</div>
+					<div class="row">
+						<div class="col-md-6" id="checkSexo">
+							<div class="form-check">	
+								<input class="form-check-input" type="checkbox" name="checkbox"
+								id="sexoM" required>
+								<label  class="form-check-label" for="sexoM">Masculino</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="checkbox"
+								id="sexoF" required>
+								<label  class="form-check-label" for="sexoF">Femenino</label>
+							</div>
+						</div>		
+					</div>
+					
+					<div>
+						<input id="jugar" class="btn btn-primary" class="form-control" type="button" name="button" value="jugar">	
+					</div>
+					
+					
+				</form>
+				</div>
+			</div>
+		</div> 
+		</div>
+	</div>
+	<script src="js/miJquery.js"></script>
+	<script src="js/validacionFormulario.js"></script>
+</body>
+</html>
