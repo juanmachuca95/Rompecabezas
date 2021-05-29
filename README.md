@@ -1,4 +1,6 @@
-Rompecabezas de 9 piezas.
+# Rompecabezas de 9 piezas.
+
+# Instrucciones
 
 Tiene una duracion de 15 segundos para completar el juego.
 la seleccion se hace atraves de un click de seleccion y otro click a la casilla de 
