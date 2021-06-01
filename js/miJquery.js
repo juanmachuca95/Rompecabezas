@@ -4,8 +4,8 @@ window.addEventListener("load", inicio, false);
 
 function inicio(){
 	//separado
-	$('#panelControl').hide();
-	$('#miTabla').hide();
+	$('#panelControl').show();
+	$('#miTabla').show();
 	primerClick();
 }
 

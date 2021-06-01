@@ -105,6 +105,10 @@ function validar(){
     var vForm = document.getElementById('formulario').checkValidity();
 
     if(vForm){ 
+        var nombre = document.getElementById('nombre').value;
+        var pais   = document.getElementById('pais').value;
+        
+        window.location.href = "gameone.html?usuario="+nombre+"&pais="+pais+"&valido=si";
         $('#panelControl').show("slow");        //Me muestra La imagen y tiempo
         $('#contenedorTabla').show("slow");     //Muestra la zona de juego.
         $('#miTabla').show("slow");

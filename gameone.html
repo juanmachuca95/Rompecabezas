@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="img/logo/rompecabezas_javascript.svg" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <title>Rompecabezas Javascript - Game one</title>
+</head>
+<body>
+
+    <!--Incorporacion de un modal de bootstrap-->
+	<div id="miModal" class="modal"  data-backdrop="static" tabindex="-1" role="dialog" >
+		<div class="modal-dialog" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title">Mensaje del Juego</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  <h3>¡&#x1f389;Felicidades&#x1f38a;!</h3>
+			  <p>¡Has ganado el juego  &#x1f3c6;!</p>
+			</div>
+			<div class="modal-footer">
+			<!-- <button type="button" class="btn btn-primary">Pasar al Nivel 2</button> -->
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="home()">Salir</button>
+			</div>
+		  </div>
+		</div>
+	  </div>	
+
+	<!--modal derrota-->
+	<div id="miModalDerrota" class="modal" data-backdrop="static" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title">Mensaje del Juego</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<h3>¡&#x1f97a;Lo siento! Intentalo de nuevo &#x1f62d;!</h3>
+			<p>¡Has perdido el juego!</p>
+		</div>
+		<div class="modal-footer">
+			<!--<button type="button" class="btn btn-primary">Pasar al Nivel 2</button>-->
+			<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="home()">Salir</button>
+		</div>
+		</div>
+	</div>
+	</div>	
+    
+	<div class="container-fluid px-0 py-5">
+        <!-- Barra de juego -->
+        <div class="row p-0 m-0">
+            <div class="col-12 text-center pt-4">
+                <p id="panelControl"></p>
+                <div id="tiempo">
+                    <p id="segundos"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-8">
+
+                <div class="row m-0 p-0 d-flex">
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="1" src="img/part3.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="2" src="img/part5.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="3" src="img/part1.png" alt="img-part1">
+                    </div>
+                </div>
+                <div class="row m-0 p-0 d-flex">
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="4" src="img/part7.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="5" src="img/part2.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="6" src="img/part9.png" alt="img-part1">
+                    </div>
+                </div>
+                
+                <div class="row m-0 p-0">
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="7" src="img/part6.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="8" src="img/part8.png" alt="img-part1">
+                    </div>
+        
+                    <div class="col-4 col-md-4 m-0 p-0">
+                        <img class="img-fluid p-1 rounded w-100" id="img-caja" data-id="9" src="img/part4.png" alt="img-part1">
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4 p-0">
+                <div class="text-center" id="panelControl">
+					<img class="p-5 rounded mx-auto d-block border-0 img-fluid img-thumbnail" src="img/rompe.jpg">
+					
+				</div>
+            </div>
+        </div>
+	</div>
+ 
+
+
+
+    <script src="js/miJquery.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<script>
+    var seleccionOne = new Map();
+    var seleccionTwo = new Map();
+    var claveImagen = 'imagen';
+    var claveId = 'id';
+    var elemento = 'elemento';
+    var cantidadSegundos = 16;
+
+    window.addEventListener('DOMContentLoaded', () => {
+        var remplaza = '/+/gi'; 
+        const data = window.location.search;
+        const urlParam = new URLSearchParams(data);
+        if (!urlParam.has('valido') || urlParam.get('valido') != 'si') 
+            return window.location.href = "index.html";
+        
+        const usuario = urlParam.get('usuario');
+        const pais = urlParam.get('pais');
+
+        //console.log(usuario, pais);
+        
+        detener = setInterval(function(){
+            cantidadSegundos--;
+            if(cantidadSegundos == 0 && !verificarGameOne()){
+                clearInterval(detener);
+                $('#miModalDerrota').modal("show");
+            };
+            return $('#segundos').html('&#x231b;'+cantidadSegundos);
+        }, 1000);
+
+        mostrarInfoUsuario(usuario, pais);
+    });
+
+    puzzles = document.querySelectorAll('#img-caja');
+    puzzles.forEach(element => {
+        element.addEventListener('click', (e) => {
+
+            puzzle = e.target;
+            primerClick = (!seleccionOne.get(claveId)) ? true : false; // primer click
+            segundoClick = (!seleccionTwo.get(claveId) && puzzle.dataset.id !== seleccionOne.get(claveId)) ? true : false;
+            
+            if(primerClick){
+                imagenSelectOne = puzzle.src;
+                seleccionOne.set(claveImagen, imagenSelectOne);
+                seleccionOne.set(claveId, puzzle.dataset.id);
+                seleccionOne.set(elemento, puzzle);
+
+                $(puzzle).css("border","2px solid blue");
+                console.log(seleccionOne);
+                console.log("Primer click");
+            
+            }else if(segundoClick){
+                imagenSelectOne = puzzle.src;
+                seleccionTwo.set(claveImagen, imagenSelectOne);
+                seleccionTwo.set(claveId, puzzle.dataset.id);
+                seleccionTwo.set(elemento, puzzle);
+
+                console.log(seleccionTwo);
+                console.log("segundo click");
+                puzzleOne = seleccionOne.get('elemento');
+                seleccionOne.get('elemento').src = seleccionTwo.get(claveImagen);
+                seleccionTwo.get('elemento').src = seleccionOne.get(claveImagen);
+                seleccionOne = new Map();
+                seleccionTwo = new Map();
+                puzzleOne.style.border = "0px solid white"; 
+                puzzle.style.border = "0px solid white";
+                console.log("Listo para el cambio!! dos puzzles diferentes se han elegido");
+                if(verificarGameOne()){
+                    clearInterval(detener);  
+                    $('#miModal').modal("show");  //Modal de victoria.
+                };
+            }else{
+                seleccionOne = new Map();
+                console.log("Has elegido el mismo puzzles");
+                $(puzzle).css("border", "0px solid white");
+            }
+        });
+    });
+
+    function mostrarInfoUsuario(usuario, pais){
+        $('#panelControl').append(
+            '<div>'+
+                '<h5 class="font-weight-light" id="nombreInfo">'+
+                    '<b>Jugador/a : </b>'+usuario+
+                '</h5>'+
+                '<h5 class="font-weight-light" id="nombreInfo">'+
+                    '<b>Pais : </b>'+pais+
+                '</h5>'+
+            '</div>'
+        );
+    }
+
+    function verificarGameOne(){
+        var imgFuentes = new Array('img/part1.png','img/part2.png','img/part3.png','img/part4.png',
+        'img/part5.png','img/part6.png', 'img/part7.png', 'img/part8.png','img/part9.png');
+
+        var gamefinalizado = true;
+        for(var i=0; i < puzzles.length; i++){
+            if(!puzzles[i].getAttribute('src').includes(imgFuentes[i])){
+                gamefinalizado = false;
+            }
+        }
+
+        console.log("gamefinalizado: " + gamefinalizado);
+        return gamefinalizado;
+
+    }
+
+    function home(){
+        location.href = "index.html";
+    }
+
+</script>
